@@ -86,6 +86,25 @@ function makeOnKeyPress(maxLength) {
   };
 }
 
+/**
+ * Preact does not guarantee that ref callbacks are called when components are mounted.
+ */
+function waitUntilInDOM(inputRef) {
+  return function resolve(ref) {
+    if (!ref) {
+      inputRef(ref);
+      return;
+    }
+
+    if (!ref.offsetParent) {
+      requestAnimationFrame(() => resolve(ref));
+      return;
+    }
+
+    inputRef(ref);
+  };
+}
+
 export default function Input({
   ariaLabel,
   autoFocus,
@@ -143,7 +162,7 @@ export default function Input({
         }
       }}
       placeholder={placeholder}
-      ref={mergeRefs(updateInputWidth, updateInputWidthOnFontLoad, inputRef)}
+      ref={waitUntilInDOM(mergeRefs(updateInputWidth, updateInputWidthOnFontLoad, inputRef))}
       required={required}
       step={step}
       type="number"
