@@ -11,6 +11,7 @@ import {
 import Divider from './Divider';
 import Hour12Input from './TimeInput/Hour12Input';
 import Hour24Input from './TimeInput/Hour24Input';
+import Hour99Input from './TimeInput/Hour99Input';
 import MinuteInput from './TimeInput/MinuteInput';
 import SecondInput from './TimeInput/SecondInput';
 import NativeInput from './TimeInput/NativeInput';
@@ -142,6 +143,8 @@ export default class TimeInput extends PureComponent {
 
   hour24Input = createRef();
 
+  hour99Input = createRef();
+
   minuteInput = createRef();
 
   secondInput = createRef();
@@ -213,6 +216,7 @@ export default class TimeInput extends PureComponent {
       return format;
     }
 
+    const hour99 = 21;
     const hour24 = 21;
     const hour12 = 9;
     const minute = 13;
@@ -315,6 +319,10 @@ export default class TimeInput extends PureComponent {
         this.setState({ hour: value }, this.onChangeExternal);
         break;
       }
+      case 'hour99': {
+        this.setState({ hour: value }, this.onChangeExternal);
+        break;
+      }
       default: {
         this.setState({ [name]: value }, this.onChangeExternal);
       }
@@ -364,6 +372,7 @@ export default class TimeInput extends PureComponent {
       this.amPmInput.current,
       this.hour12Input.current,
       this.hour24Input.current,
+      this.hour99Input.current,
       this.minuteInput.current,
       this.secondInput.current,
     ].filter(Boolean);
@@ -395,8 +404,11 @@ export default class TimeInput extends PureComponent {
     if (/h/.test(currentMatch)) {
       return this.renderHour12(currentMatch, index);
     }
+    if (/H/.test(currentMatch)) {
+      return this.renderHour24(currentMatch, index);
+    }
 
-    return this.renderHour24(currentMatch, index);
+    return this.renderHour99(currentMatch, index);
   };
 
   renderHour12 = (currentMatch, index) => {
@@ -438,6 +450,31 @@ export default class TimeInput extends PureComponent {
     return (
       <Hour24Input
         key="hour24"
+        {...this.commonInputProps}
+        ariaLabel={hourAriaLabel}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus={index === 0 && autoFocus}
+        inputRef={this.hour24Input}
+        placeholder={hourPlaceholder}
+        showLeadingZeros={showLeadingZeros}
+        value={hour}
+      />
+    );
+  };
+
+  renderHour99 = (currentMatch, index) => {
+    const { autoFocus, hourAriaLabel, hourPlaceholder } = this.props;
+    const { hour } = this.state;
+
+    if (currentMatch && currentMatch.length > 2) {
+      throw new Error(`Unsupported token: ${currentMatch}`);
+    }
+
+    const showLeadingZeros = currentMatch && currentMatch.length === 2;
+
+    return (
+      <Hour99Input
+        key="hour99"
         {...this.commonInputProps}
         ariaLabel={hourAriaLabel}
         // eslint-disable-next-line jsx-a11y/no-autofocus
