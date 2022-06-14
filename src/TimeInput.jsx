@@ -479,7 +479,7 @@ export default class TimeInput extends PureComponent {
         ariaLabel={hourAriaLabel}
         // eslint-disable-next-line jsx-a11y/no-autofocus
         autoFocus={index === 0 && autoFocus}
-        inputRef={this.hour24Input}
+        inputRef={this.hour99Input}
         placeholder={hourPlaceholder}
         showLeadingZeros={showLeadingZeros}
         value={hour}
@@ -566,6 +566,7 @@ export default class TimeInput extends PureComponent {
     const elementFunctions = {
       h: this.renderHour,
       H: this.renderHour,
+      N: this.renderHour99,
       m: this.renderMinute,
       s: this.renderSecond,
       a: this.renderAmPm,
