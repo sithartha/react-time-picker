@@ -1,6 +1,6 @@
 {
   "name": "react-99h-time-picker",
-  "version": "4.5.0",
+  "version": "4.5.1",
   "description": "A time picker for your React app which can do 99 hours input.",
   "main": "dist/entry.js",
   "source": "src/entry.js",
@@ -12,7 +12,6 @@
     "copy-styles": "node ./copy-styles.js",
     "jest": "jest",
     "lint": "eslint sample/ src/ test/ --ext .jsx,.js",
-    "postinstall": "husky install",
     "prepack": "yarn clean && yarn build",
     "test": "yarn lint && yarn jest"
   },
