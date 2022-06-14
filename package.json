@@ -1,7 +1,7 @@
 {
-  "name": "react-time-picker",
+  "name": "react-99h-time-picker",
   "version": "4.5.0",
-  "description": "A time picker for your React app.",
+  "description": "A time picker for your React app which can do 99 hours input.",
   "main": "dist/entry.js",
   "source": "src/entry.js",
   "scripts": {
@@ -21,10 +21,7 @@
     "time",
     "time-picker"
   ],
-  "author": {
-    "name": "Wojciech Maj",
-    "email": "kontakt@wojtekmaj.pl"
-  },
+  "author": "sithartha <gsithartha@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@wojtekmaj/date-utils": "^1.0.0",
@@ -68,8 +65,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wojtekmaj/react-time-picker.git"
+    "url": "git+https://github.com/sithartha/react-time-picker.git"
   },
-  "funding": "https://github.com/wojtekmaj/react-time-picker?sponsor=1",
-  "packageManager": "yarn@3.1.0"
+  "packageManager": "yarn@3.1.0",
+  "bugs": {
+    "url": "https://github.com/sithartha/react-time-picker/issues"
+  },
+  "homepage": "https://github.com/sithartha/react-time-picker#readme",
+  "directories": {
+    "test": "test"
+  }
 }
